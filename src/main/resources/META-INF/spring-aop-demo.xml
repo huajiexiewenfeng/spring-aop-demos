@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userImpl" class="com.csdn.spring.aop.demo.impl.UserImpl"/>
+
+    <!-- this is the actual advice itself -->
+    <bean id="profiler" class="com.csdn.spring.aop.demo.profiler.DefaultProfiler"/>
+
+    <aop:config>
+        <aop:aspect ref="profiler">
+
+            <aop:pointcut id="someUserServiceMethod"
+                          expression="execution(* com.csdn.spring.aop.demo.service.UserService.getUser())"/>
+
+            <aop:before pointcut-ref="someUserServiceMethod"
+                        method="beforeAdvice"/>
+
+        </aop:aspect>
+    </aop:config>
+
+</beans>
