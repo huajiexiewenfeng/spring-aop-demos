@@ -19,6 +19,9 @@
             <aop:before pointcut-ref="someUserServiceMethod"
                         method="beforeAdvice"/>
 
+            <aop:after pointcut-ref="someUserServiceMethod"
+                        method="afterAdvice"/>
+
         </aop:aspect>
     </aop:config>
 

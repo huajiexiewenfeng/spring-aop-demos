@@ -11,6 +11,7 @@ public class UserImpl implements UserService {
 
     @Override
     public User getUser() {
+        System.out.println("方法执行...");
         return new User(1L, "xwf");
     }
 
