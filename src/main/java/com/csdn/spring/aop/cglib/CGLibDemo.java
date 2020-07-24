@@ -27,15 +27,15 @@ public class CGLibDemo {
         public T getInstance(T target) {
             this.target = target;
             Enhancer enhancer = new Enhancer();
-            enhancer.setSuperclass(target.getClass());
+            enhancer.setSuperclass(this.target.getClass());
             enhancer.setCallback(this);
             return (T) (enhancer.create());
         }
 
         @Override
-        public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+        public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
             preOperation();
-            Object retVal = methodProxy.invokeSuper(o, objects);
+            Object retVal = methodProxy.invoke(this.target, args);
             postOperation();
             return retVal;
         }
